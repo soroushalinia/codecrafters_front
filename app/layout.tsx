@@ -3,6 +3,7 @@ import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
 
 const fontVazir = Vazirmatn({
   subsets: ["arabic", "latin"],
@@ -21,9 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(`${fontVazir.className}`)} dir="rtl">
+      <body className={cn(`${fontVazir.className} overflow-x-hidden`)} dir="rtl">
         <Navbar></Navbar>
         {children}
+        <Footer></Footer>
       </body>
     </html>
   );
