@@ -42,7 +42,7 @@ export default function Home() {
             بهره‌مند شوید.
           </p>
           <br />
-          
+
           <p>
             اعضای Code Crafters در زمینه‌های مختلفی مانند توسعه وب، هوش مصنوعی،
             اپلیکیشن‌های مختلف، داده‌کاوی، و غیره فعالیت می‌کنند. ما به
@@ -59,7 +59,12 @@ export default function Home() {
           <br />
           <br />
           <br />
-          <Link href="/contact" className="bg-primary rounded-full p-4 text-white text-xl hover:bg-secondary" >عضویت در Code Crafters</Link>
+          <Link
+            href="/contact"
+            className="bg-primary rounded-full p-4 text-white text-xl hover:bg-secondary"
+          >
+            عضویت در Code Crafters
+          </Link>
         </div>
       </div>
       <div className="pt-[75px] lg:pt-[150px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">

@@ -1,9 +1,10 @@
 import * as shamsi from "shamsi-date-converter";
 
 async function getData(slug: string) {
-  const posts = await fetch("http://127.0.0.1:8002/api/blog");
-  const authors = await fetch("http://127.0.0.1:8002/api/teacher");
-  const catalog = await fetch("http://127.0.0.1:8002/api/catalog");
+  const baseUrl = process.env.API_URL;
+  const posts = await fetch(`${baseUrl}/api/blog`);
+  const authors = await fetch(`${baseUrl}/api/teacher`);
+  const catalog = await fetch(`${baseUrl}/api/catalog`);
 
   if (!posts.ok || !authors.ok || !catalog.ok) {
     throw new Error("Failed to fetch post");
@@ -45,7 +46,9 @@ export default async function Post({ params }: { params: { slug: string } }) {
         <div className="flex flex-row gap-2 items-center justify-center">
           <p className="font-bold text-2xl text-primary">نوشته شده توسط: </p>
           <p className="font-medium text-2xl text-secondary">{author}</p>
-          <p className="font-medium text-2xl text-secondary">{persianCreated}</p>
+          <p className="font-medium text-2xl text-secondary">
+            {persianCreated}
+          </p>
         </div>
         <br />
 
@@ -54,13 +57,15 @@ export default async function Post({ params }: { params: { slug: string } }) {
           src={post.image}
           alt={`Post ${post.slug} Banner`}
         />
-        
+
         <br />
         <hr />
         <br />
 
-        <p className="text-primary text-right" dangerouslySetInnerHTML={{ __html: post.describe }}></p>
-        
+        <p
+          className="text-primary text-right"
+          dangerouslySetInnerHTML={{ __html: post.describe }}
+        ></p>
       </div>
     </div>
   );

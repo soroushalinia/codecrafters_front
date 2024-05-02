@@ -10,9 +10,10 @@ import { Badge } from "@/components/ui/badge";
 import * as shamsi from "shamsi-date-converter";
 
 async function getData() {
-  const posts = await fetch("http://127.0.0.1:8002/api/blog");
-  const authors = await fetch("http://127.0.0.1:8002/api/teacher");
-  const catalog = await fetch("http://127.0.0.1:8002/api/catalog");
+  const baseUrl = process.env.API_URL;
+  const posts = await fetch(`${baseUrl}/api/blog`);
+  const authors = await fetch(`${baseUrl}/api/teacher`);
+  const catalog = await fetch(`${baseUrl}/api/catalog`);
   if (!posts.ok || !authors.ok || !catalog.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -60,7 +61,9 @@ export default async function Blog() {
   return (
     <>
       <div className="p-12 mt-24 lg:p-24 text-center flex flex-col items-center justify-center">
-        <h1 className="text-3xl lg:text-5xl text-primary font-semibold">به وبلاگ Code Crafters خوش آمدید!</h1>
+        <h1 className="text-3xl lg:text-5xl text-primary font-semibold">
+          به وبلاگ Code Crafters خوش آمدید!
+        </h1>
         <br />
         <p className="font-medium text-secondary text-xl max-w-[1000px]">
           در اینجا، Code Crafters به اشتراک‌گذاری مقالات تخصصی، و تجارب

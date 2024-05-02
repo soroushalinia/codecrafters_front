@@ -11,7 +11,8 @@ import {
 import Image from "next/image";
 
 async function getData() {
-  const res = await fetch("http://127.0.0.1:8001/api/teacher");
+  const baseUrl = process.env.API_URL;
+  const res = await fetch(`${baseUrl}/api/teacher`);
   if (!res.ok) {
     throw new Error("Failed to fetch teachers");
   }
@@ -20,7 +21,6 @@ async function getData() {
 
 export default async function About() {
   const teachers = await getData();
-  console.log(teachers);
   const teachersView = teachers.map((teacher: any) => {
     return (
       <Card key={teacher.name}>
@@ -47,16 +47,28 @@ export default async function About() {
           <p dangerouslySetInnerHTML={{ __html: teacher.describe }}></p>
         </CardContent>
         <CardFooter className="flex flex-row-reverse justify-center gap-2 lg:gap-6">
-          <a href={`https://github.com/${teacher.github_username}`} className="p-3 rounded-full text-primary bg-gray-200 hover:bg-primary hover:text-white">
+          <a
+            href={`https://github.com/${teacher.github_username}`}
+            className="p-3 rounded-full text-primary bg-gray-200 hover:bg-primary hover:text-white"
+          >
             <FaGithub className="w-6 h-6"></FaGithub>
           </a>
-          <a href={`https://linkedin.com/${teacher.linkedin_username}`} className="p-3 rounded-full text-primary bg-gray-200 hover:bg-primary hover:text-white">
+          <a
+            href={`https://linkedin.com/${teacher.linkedin_username}`}
+            className="p-3 rounded-full text-primary bg-gray-200 hover:bg-primary hover:text-white"
+          >
             <FaLinkedin className="w-6 h-6"></FaLinkedin>
           </a>
-          <a href={`mailto:${teacher.email}`} className="p-3 rounded-full text-primary bg-gray-200 hover:bg-primary hover:text-white">
+          <a
+            href={`mailto:${teacher.email}`}
+            className="p-3 rounded-full text-primary bg-gray-200 hover:bg-primary hover:text-white"
+          >
             <FaMessage className="w-6 h-6"></FaMessage>
           </a>
-          <a href={`https://t.me/${teacher.telegram_username}`} className="p-3 rounded-full text-primary bg-gray-200 hover:bg-primary hover:text-white">
+          <a
+            href={`https://t.me/${teacher.telegram_username}`}
+            className="p-3 rounded-full text-primary bg-gray-200 hover:bg-primary hover:text-white"
+          >
             <FaTelegram className="w-6 h-6"></FaTelegram>
           </a>
         </CardFooter>

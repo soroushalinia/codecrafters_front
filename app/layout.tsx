@@ -22,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(`${fontVazir.className} overflow-x-hidden`)} dir="rtl">
+      <body
+        className={cn(`${fontVazir.className} overflow-x-hidden`)}
+        dir="rtl"
+      >
         <Navbar></Navbar>
         {children}
         <Footer></Footer>
