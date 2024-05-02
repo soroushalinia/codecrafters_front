@@ -19,6 +19,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.0",
+    "shamsi": "^1.1.6",
+    "shamsi-date-converter": "^1.0.5",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },

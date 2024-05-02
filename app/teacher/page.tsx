@@ -34,8 +34,8 @@ export default async function About() {
                   className="rounded-full w-[200px] h-[200px] object-cover"
                   src={teacher.image}
                   alt={`${teacher.name}_profile`}
-                  width={100}
-                  height={100}
+                  width={200}
+                  height={200}
                 ></Image>
               )}
               <p>{teacher.name}</p>
