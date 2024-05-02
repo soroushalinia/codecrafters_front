@@ -19,7 +19,7 @@ export default function Footer() {
           تجربیات می‌پردازند.
         </p>
       </div>
-      <div className="grid grid-cols-3 gap-4 items-center justify-center">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-4 items-center justify-center">
         <Link
           className="p-1 hover:bg-white hover:text-primary hover:rounded-full text-center"
           href="/about"
@@ -59,7 +59,7 @@ export default function Footer() {
       </div>
       <div className="flex flex-col gap-4 items-center text-lg justify-center">
         <p className="">
-          ارتباط با ما
+          ارتباط با سازنده قالب 
         </p>
         <div className="flex flex-row items-center gap-6">
         <a href="https://t.me/soroush_pm">
