@@ -80,3 +80,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+.rtl {
+  direction: rtl;
+}
+
+.ltr {
+  direction: ltr;
+}
+
