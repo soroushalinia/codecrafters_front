@@ -14,7 +14,7 @@ export default function Navbar() {
     setMenuToggled(!menuToggled);
   };
   return (
-    <nav className="flex flex-col items-center justify-center border-b border-primary">
+    <nav className="flex flex-col ltr items-center justify-center border-b border-primary">
       <div className="flex flex-row w-screen p-4 items-center justify-between">
         <div
           id="logo"

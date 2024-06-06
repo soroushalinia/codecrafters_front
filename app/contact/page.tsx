@@ -3,6 +3,9 @@ import {
   IoCashOutline,
   IoHelpCircleOutline,
 } from "react-icons/io5";
+import Image from "next/image";
+import GiftBox from "@/image/gift_icon.svg";
+import TelegramLogo from "@/image/tg_logo.svg";
 
 export default function Contact() {
   return (
@@ -23,11 +26,8 @@ export default function Contact() {
             در صورتی که قصد دارید از گروه CodeCrafters حمایت کنید، می توانید از
             لینک پرداخت زیر استفاده کنید
           </p>
-          <a
-            className="p-4 bg-secondary text-white rounded-full"
-            href="https://zarinp.al/codecrafters.ir"
-          >
-            https://zarinp.al/codecrafters.ir
+          <a href="https://zarinp.al/codecrafters.ir">
+            <Image src={GiftBox} alt="GiftBox" width={128} height={128}></Image>
           </a>
         </div>
         <div className="flex flex-col lg:flex-row gap-8 justify-between items-center text-center">
@@ -38,20 +38,9 @@ export default function Contact() {
             در صورتی که درخواست انجام پروژه دارید می توانید از طریق این لینک
             درخواست خود را ثبت کنید
           </p>
-          <div className="flex flex-row gap-6 items-center justify-center">
-            <a
-              className="p-4 bg-secondary text-white rounded-full"
-              href="https://t.me/soroush_pm"
-            >
-              Telegram
-            </a>
-            <a
-              className="p-4 bg-secondary text-white rounded-full"
-              href="mailto:soroushalinia.wm@gmail.com"
-            >
-              Email
-            </a>
-          </div>
+          <a className="p-3" href="https://t.me/soroush_pm">
+            <Image src={TelegramLogo} alt="Telegram Logo" width={96} height={96}></Image>
+          </a>
         </div>
         <div className="flex flex-col lg:flex-row gap-8 justify-between items-center text-center">
           <div className="bg-gray-100 hover:bg-primary p-8 rounded-full hover:text-white text-primary">
@@ -61,20 +50,9 @@ export default function Contact() {
             در صورتی که انتقاد یا پیشنهادی دارید و یا سوالی وجود دارد می توانید
             از طریق این لینک با ما صحبت کنید
           </p>
-          <div className="flex flex-row gap-6 items-center justify-center">
-            <a
-              className="p-4 bg-secondary text-white rounded-full"
-              href="https://t.me/soroush_pm"
-            >
-              Telegram
-            </a>
-            <a
-              className="p-4 bg-secondary text-white rounded-full"
-              href="mailto:soroushalinia.wm@gmail.com"
-            >
-              Email
-            </a>
-          </div>
+           <a className="p-3" href="https://t.me/behzad_azadi">
+            <Image src={TelegramLogo} alt="Telegram Logo" width={96} height={96}></Image>
+          </a>
         </div>
       </div>
     </div>

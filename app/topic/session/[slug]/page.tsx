@@ -4,7 +4,7 @@ import * as shamsi from "shamsi-date-converter";
 async function getData({ slug }: { slug: string }) {
   try {
     const baseUrl = process.env.API_URL;
-    const res = await fetch(`${baseUrl}/api/blog/${slug}`, {
+    const res = await fetch(`${baseUrl}/api/topic/session/${slug}`, {
       next: { revalidate: 10 },
     });
     if (!res.ok) {
@@ -24,6 +24,7 @@ async function getData({ slug }: { slug: string }) {
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const post = await getData({ slug: params.slug });
+//   console.log(post)
   if (post === null) {
     return (
       <div className="h-screen text-center flex flex-col gap-12 items-center justify-center">
@@ -53,16 +54,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const persianCreated = shamsi.gregorianToJalali(post.data.created).join("/");
 
   return (
-    <div className="p-10">
-      {/* p 24 */}
-      <div className="flex flex-col items-center justify-start">
-        <img
-          width={"auto"}
-          height={"auto"}
-          className="max-w-[1024px] w-[350px] sm:w-[500px] md:w-[650px] lg:w-[900px] xl:w-[1050px] 2xl:w-[1400px] max-h-[350px] rounded-sm object-scale-down"
-          src={post.data.image}
-          alt={`Post ${post.data.slug} Banner`}
-        />
+    <div className="p-10 max-w-[1024px] flex flex-row justify-center">
+      <div className="flex flex-col items-start justify-start ">
         <br />
         {/* <br /> */}
         <h1 className="font-extrabold text-primary text-3xl lg:text-4xl w-full">
@@ -76,13 +69,13 @@ export default async function Post({ params }: { params: { slug: string } }) {
         </div>
         <div className="flex flex-row items-center gap-1 text-primary font-semibold text-sm w-full">
           <p>نوشته شده توسط: </p>
-          <p>{post.data.author.name}</p>
+          {/* <p>{post.data.author.name}</p> */}
         </div>
         <br />
         <br />
         <p
           className="text-primary w-full"
-          dangerouslySetInnerHTML={{ __html: post.data.describe }}
+          dangerouslySetInnerHTML={{ __html: post.data.describtion }}
         ></p>
       </div>
     </div>

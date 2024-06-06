@@ -8,56 +8,37 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import * as shamsi from "shamsi-date-converter";
+import Link from "next/link";
 
 async function getData() {
-  const baseUrl = process.env.API_URL;
-  const imageUrl = baseUrl + "/media/blog/microsoft-ignite-4098x2653-10160.jpg";
-  const topics = [
-    {
-      id: 1,
-      slug: "test-1",
-      title: "Test 1",
-      image: imageUrl,
-      author: "سروش علی نیا",
-      start: "1402/2/12",
-      describe: "Test Topic 1",
-    },
-    {
-      id: 2,
-      title: "Test 2",
-      slug: "test-2",
-      image: imageUrl,
-      author: "سروش علی نیا",
-      start: "1402/2/12",
-      describe: "Test Topic 2",
-    },
-    {
-      id: 3,
-      title: "Test 3",
-      slug: "test-3",
-      image: imageUrl,
-      author: "سروش علی نیا",
-      start: "1402/2/12",
-      describe: "Test Topic 3",
-    },
-    {
-      id: 4,
-      title: "Test 4",
-      slug: "test-4",
-      image: imageUrl,
-      author: "سروش علی نیا",
-      start: "1402/2/12",
-      describe: "Test Topic 4",
-    },
-  ];
-  return topics;
+  try {
+    const baseUrl = process.env.API_URL;
+    const res = await fetch(`${baseUrl}/api/realpython`, {
+      next: { revalidate: 10 },
+    });
+    if (!res.ok) {
+      return null;
+    }
+    return res.json();
+  } catch (e) {
+    return null;
+  }
 }
 
 export default async function Blog() {
   const topics = await getData();
+  if (topics === null) {
+    return (
+      <div className="h-screen text-center flex flex-col gap-12 items-center justify-center">
+        <h1 className="text-8xl font-bold text-primary">خطا</h1>
+        <h2 className="text-primary font-bold text-5xl">امکان اتصال به سرور وجود ندارد</h2>
+        <Link className="text-primary font-bold text-2xl" href="/">بازگشت به صفحه اصلی</Link>
+      </div>
+    );
+  }
   const topicView = topics.map((topic: any) => {
     return (
-      <Card key={topic.id} className="border-primary">
+      <Card key={topic.id} className="border-primary hover:bg-primary hover:text-white">
         <CardHeader>
           <CardTitle>
             <div className="flex flex-col gap-4">
@@ -74,7 +55,7 @@ export default async function Blog() {
         </CardHeader>
         <CardContent>
           <span className="font-bold text-lg">نویسنده: </span>
-          {topic.author}
+          {topic.author.name}
         </CardContent>
         <CardFooter>
         </CardFooter>
@@ -85,11 +66,11 @@ export default async function Blog() {
     <>
       <div className="p-12 mt-24 lg:p-24 text-center flex flex-col items-center justify-center">
         <h1 className="text-3xl lg:text-5xl text-primary font-semibold">
-          Realpython Farsi
+          موضوعات
         </h1>
         <br />
         <p className="font-medium text-secondary text-xl max-w-[1000px]">
-          در این قسمت از سایت مقالات ترجمه شده از سایت Realpython به تفکیک موضوعات قرار می گیرد
+          در این بخش آموزش موضوعات مختلف به صورت تفکیک شده قرار می گیرد.
         </p>
         <br />
         <br />

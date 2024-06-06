@@ -89,3 +89,7 @@
   direction: ltr;
 }
 
+pre {
+  text-align: left;
+  direction: ltr;
+}

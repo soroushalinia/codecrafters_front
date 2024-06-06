@@ -8,36 +8,55 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import * as shamsi from "shamsi-date-converter";
+import Link from "next/link";
 
 async function getData() {
-  const baseUrl = process.env.API_URL;
-  const posts = await fetch(`${baseUrl}/api/blog`);
-  const authors = await fetch(`${baseUrl}/api/teacher`);
-  const catalog = await fetch(`${baseUrl}/api/catalog`);
-  if (!posts.ok || !authors.ok || !catalog.ok) {
-    throw new Error("Failed to fetch data");
+  try {
+    const baseUrl = process.env.API_URL;
+    const res = await fetch(`${baseUrl}/api/blog`, {
+      next: { revalidate: 10 },
+    });
+    if (!res.ok) {
+      return {
+        status: res.status,
+        data: null,
+      };
+    }
+    return {
+      status: 200,
+      data: await res.json(),
+    };
+  } catch (e) {
+    return null;
   }
-  return {
-    posts: await posts.json(),
-    authors: await authors.json(),
-    catalog: await catalog.json(),
-  };
 }
-
 export default async function Blog() {
   const data = await getData();
-  const postsView = data["posts"].map((post: any) => {
+  const posts = await getData();
+  if (posts === null) {
+    return (
+      <div className="h-screen text-center flex flex-col gap-12 items-center justify-center">
+        <h1 className="text-8xl font-bold text-primary">خطا</h1>
+        <h2 className="text-primary font-bold text-5xl">
+          امکان اتصال به سرور وجود ندارد
+        </h2>
+        <Link className="text-primary font-bold text-2xl" href="/">
+          بازگشت به صفحه اصلی
+        </Link>
+      </div>
+    );
+  }
+  const postsView = posts.data.map((post: any) => {
     const created: Date = new Date(post.created);
-    const author = data["authors"].filter((a: any) => a.id === post.author)[0]
-      .name;
-    const topic = data["catalog"][post.catalog - 1].title;
     const persianCreated = shamsi.gregorianToJalali(created).join("/");
     return (
-      <Card key={post.id} className="border-primary">
+      <Card key={post.id} className="border-primary hover:bg-primary hover:text-white">
         <CardHeader>
           <CardTitle>
             <div className="flex flex-col gap-4">
               <img
+                width={"auto"}
+                height={"auto"}
                 className="rounded-lg object-cover h-[225px] lg:h-[300px]"
                 src={post.image}
                 alt={`Post ${post.slug} Banner`}
@@ -50,10 +69,10 @@ export default async function Blog() {
         </CardHeader>
         <CardContent>
           <span className="font-bold text-lg">نویسنده: </span>
-          {author}
+          {post.author.name}
         </CardContent>
         <CardFooter>
-          <Badge className="bg-primary pt-1">{topic}</Badge>
+          <Badge className="bg-primary pt-1">{post.catalog.title}</Badge>
         </CardFooter>
       </Card>
     );
